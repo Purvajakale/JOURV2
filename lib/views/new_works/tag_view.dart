@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jourv2/models/work.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:jourv2/views/home_view.dart';
 import 'package:jourv2/widget/provider_widget.dart';
 
 class NewScheduleTag extends StatefulWidget {
@@ -14,6 +15,8 @@ class NewScheduleTag extends StatefulWidget {
 }
 
 class _NewScheduleTagState extends State<NewScheduleTag> {
+  int count = 0;
+
   final db = FirebaseFirestore.instance;
   String _selectedTag = 'official';
   final List<String> meet = ['official', 'unofficial', 'family', 'health'];
@@ -61,7 +64,12 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
                     .doc(uid)
                     .collection("works")
                     .add(widget.detail.toJson());
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                // Navigator.of(context).pop();
+                Navigator.popUntil(context, (route) {
+                  return count++ == 5;
+                });
+
+                // Navigator.of(context).popUntil((route) => route.isFirst);
               },
             ),
           ],
