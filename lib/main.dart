@@ -67,6 +67,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool showHome = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -77,23 +78,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('images/homepage.JPEG'),
-              fit: BoxFit.cover,
+      body: showHome
+          ? HomeController()
+          : Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/homepage.JPEG'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 
   void openOnBoard() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomeController()));
+    setState(() {
+      showHome = true;
+    });
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => HomeController()));
   }
 }
