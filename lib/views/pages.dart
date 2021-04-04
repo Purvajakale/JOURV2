@@ -173,7 +173,7 @@ class EnableUpload extends StatelessWidget {
                 if (value.isEmpty) {
                   return 'Blog Description is required';
                 }
-                return "";
+                return null;
               },
               onSaved: (String value) {
                 onsaved(value);
