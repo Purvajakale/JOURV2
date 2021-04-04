@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SecondRoute extends StatelessWidget {
-  final Function func;
+  final func;
   SecondRoute({this.func});
 
   @override
@@ -15,8 +15,9 @@ class SecondRoute extends StatelessWidget {
           centerTitle: true,
         ),
         body: SingleChildScrollView(
-            reverse: true,
-            padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
-            child: func()));
+          reverse: true,
+          padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
+          child: func,
+        ));
   }
 }

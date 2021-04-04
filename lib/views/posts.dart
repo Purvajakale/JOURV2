@@ -49,7 +49,8 @@ class _HomePageState extends State<HomePage> {
                             Padding(
                               padding: const EdgeInsets.only(bottom: 20.0),
                               child: Text(
-                                documentSnapshot.data()['description'],
+                                documentSnapshot.data()['description'] ??
+                                    "No Description",
                                 // overflow: TextOverflow.ellipsis,
                                 style: TextStyle(fontSize: 18.0),
                                 // textDirection: TextDirection.ltr,

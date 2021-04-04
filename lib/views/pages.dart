@@ -30,7 +30,15 @@ class _UploadPageState extends State<UploadPage> {
       context,
       MaterialPageRoute(
           builder: (context) => SecondRoute(
-                func: enableUpload,
+                func: EnableUpload(
+                    formKey: formKey,
+                    sampleImage: sampleImage,
+                    uploadStatusImage: uploadStatusImage,
+                    onsaved: (value) {
+                      setState(() {
+                        _myValue = value;
+                      });
+                    }),
               )),
     );
   }
@@ -43,13 +51,12 @@ class _UploadPageState extends State<UploadPage> {
       String name = timeKey.toString() + ".jpg";
       TaskSnapshot taskSnapshot = await FirebaseStorage.instance
           .ref('Post Images/$name')
-          .putFile(sampleImage as File);
+          .putFile(sampleImage);
 
       String imageURL = await taskSnapshot.ref.getDownloadURL();
 
       print("Image url=" + imageURL);
       saveToDatabase(imageURL);
-
       Navigator.pop(context);
     }
   }
@@ -77,6 +84,49 @@ class _UploadPageState extends State<UploadPage> {
         .catchError((error) => print("Failed to add post: $error"));
   }
 
+  // Widget EnableUpload() {
+  //   return Form(
+  //       key: formKey,
+  //       child: Column(
+  //         children: <Widget>[
+  //           Image.file(
+  //             sampleImage as File,
+  //             height: 273.0,
+  //             fit: BoxFit.contain,
+  //           ),
+  //           SizedBox(
+  //             height: 15.0,
+  //           ),
+  //           TextFormField(
+  //             decoration: InputDecoration(labelText: 'Description'),
+  //             minLines: 2,
+  //             maxLines: 25,
+  //             validator: (String value) {
+  //               if (value.isEmpty) {
+  //                 return 'Blog Description is required';
+  //               }
+  //             },
+  //             onSaved: (String value) {
+  //               _myValue = value;
+  //             },
+  //           ),
+  //           SizedBox(
+  //             height: 15.0,
+  //           ),
+  //           ElevatedButton(
+  //             child: Text("Add a new post"),
+  //             style: ElevatedButton.styleFrom(
+  //               primary: Colors.lightBlue,
+  //               onPrimary: Colors.white,
+  //               onSurface: Colors.grey,
+  //             ),
+  //             onPressed: uploadStatusImage,
+  //           ),
+  //         ],
+  //       ));
+
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -90,40 +140,25 @@ class _UploadPageState extends State<UploadPage> {
         onPressed: getImage,
       ),
     );
-    // Scaffold(
-    //     resizeToAvoidBottomInset: false,
-    //     appBar: AppBar(
-    //       title: Text("add note"),
-    //       centerTitle: true,
-    //     ),
-    //     body:
-    //         // sampleImage == null
-    //         // ?
-    //         Center(child: Text("Select an Image"))
-    //     // : SingleChildScrollView(
-    //     //     reverse: true,
-    //     //     padding: EdgeInsets.only(bottom: media.viewInsets.bottom),
-    //     //     child: enableUpload())
-    //     ,
-    //     floatingActionButton:
-    //         //  sampleImage == null
-    //         // ?
-    //         new FloatingActionButton(
-    //       onPressed: getImage,
-    //       tooltip: 'Add Image',
-    //       child: new Icon(Icons.add_a_photo),
-    //     )
-    //     // : null,
-    //     );
   }
+}
 
-  Widget enableUpload() {
+class EnableUpload extends StatelessWidget {
+  final Key formKey;
+  final File sampleImage;
+  final Function uploadStatusImage;
+  final Function onsaved;
+
+  EnableUpload(
+      {this.formKey, this.sampleImage, this.uploadStatusImage, this.onsaved});
+  @override
+  Widget build(BuildContext context) {
     return Form(
         key: formKey,
         child: Column(
           children: <Widget>[
             Image.file(
-              sampleImage as File,
+              sampleImage,
               height: 273.0,
               fit: BoxFit.contain,
             ),
@@ -131,16 +166,17 @@ class _UploadPageState extends State<UploadPage> {
               height: 15.0,
             ),
             TextFormField(
-              decoration: new InputDecoration(labelText: 'Description'),
+              decoration: InputDecoration(labelText: 'Description'),
               minLines: 2,
               maxLines: 25,
               validator: (String value) {
                 if (value.isEmpty) {
                   return 'Blog Description is required';
                 }
+                return "";
               },
               onSaved: (String value) {
-                _myValue = value;
+                onsaved(value);
               },
             ),
             SizedBox(
