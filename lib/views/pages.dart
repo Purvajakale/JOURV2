@@ -20,6 +20,12 @@ class _UploadPageState extends State<UploadPage> {
   ImagePicker _picker = ImagePicker();
   final FirebaseAuth auth = FirebaseAuth.instance;
 
+  Function saveValue(String value) {
+    setState(() {
+      _myValue = value;
+    });
+  }
+
   Future getImage() async {
     var tempImage = await _picker.getImage(source: ImageSource.gallery);
     final File file = File(tempImage.path);
@@ -27,20 +33,16 @@ class _UploadPageState extends State<UploadPage> {
       sampleImage = file;
     });
     Navigator.push(
-      context,
-      MaterialPageRoute(
+        context,
+        MaterialPageRoute(
           builder: (context) => SecondRoute(
-                func: EnableUpload(
-                    formKey: formKey,
-                    sampleImage: sampleImage,
-                    uploadStatusImage: uploadStatusImage,
-                    onsaved: (value) {
-                      setState(() {
-                        _myValue = value;
-                      });
-                    }),
-              )),
-    );
+              func: EnableUpload(
+            formKey: formKey,
+            sampleImage: sampleImage,
+            uploadStatusImage: uploadStatusImage,
+            onsaved: saveValue,
+          )),
+        ));
   }
 
   void uploadStatusImage() async {
