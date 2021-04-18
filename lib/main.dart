@@ -24,12 +24,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: "Travel Budget App",
         theme: ThemeData(
-          brightness: Brightness.light,
-          primarySwatch: Colors.blue,
-          appBarTheme: AppBarTheme(
-            backgroundColor: Colors.red,
-          ),
-        ),
+            brightness: Brightness.light,
+            primarySwatch: Colors.blue,
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.red,
+            ),
+            floatingActionButtonTheme: FloatingActionButtonThemeData(
+              backgroundColor: Colors.red,
+            )),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
           primarySwatch: Colors.blue,
