@@ -40,6 +40,11 @@ class _HomePageState extends State<HomePage> {
                           imageUrl: documentSnapshot.data()['image'],
                           height: 150,
                           fit: BoxFit.fitHeight,
+                          placeholder: (context, url) => Container(
+                            child: CircularProgressIndicator(),
+                            height: 150,
+                            width: 100,
+                          ),
                         ),
                       ),
                       Expanded(

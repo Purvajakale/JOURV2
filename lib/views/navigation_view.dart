@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: Text('JOUR'),
-        backgroundColor: Colors.blue,
+        // backgroundColor: Colors.blue,
         actions: <Widget>[
           // Padding(
           //   padding: const EdgeInsets.all(4.0),
