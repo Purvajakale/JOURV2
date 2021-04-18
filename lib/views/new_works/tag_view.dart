@@ -28,8 +28,8 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('''Create new Schedule - 
-          tag'''),
+        title: Text('''
+          Tag'''),
       ),
       body: Center(
         child: Column(
@@ -42,35 +42,54 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
                 'end date: ${DateFormat('dd-MM-yyyy').format(widget.detail.endDate).toString()}'),
             Text("importance : ${widget.detail.importance}"),
             Text("description : ${widget.detail.description}"),
-            Text('Select a tag'),
-            DropdownButtonFormField(
-              value: _selectedTag,
-              items: meet.map((work) {
-                return DropdownMenuItem(
-                  value: work,
-                  child: Text('$work meeting'),
-                );
-              }).toList(),
-              onChanged: (val) => setState(() => _selectedTag = val),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                'Select a tag',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-            RaisedButton(
-              child: Text('Finish'),
-              onPressed: () async {
-                widget.detail.tag = _selectedTag;
-                //save data to firebase
-                final uid = await Provider.of(context).auth.getCurrentUID();
-                await db
-                    .collection("userData")
-                    .doc(uid)
-                    .collection("works")
-                    .add(widget.detail.toJson());
-                // Navigator.of(context).pop();
-                Navigator.popUntil(context, (route) {
-                  return count++ == 5;
-                });
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: DropdownButtonFormField(
+                value: _selectedTag,
+                items: meet.map((work) {
+                  return DropdownMenuItem(
+                    value: work,
+                    child: Text('$work meeting'),
+                  );
+                }).toList(),
+                onChanged: (val) => setState(() => _selectedTag = val),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: RaisedButton(
+                child: Text('Finish'),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7.0)),
+                color: Colors.blueAccent,
+                textColor: Colors.white,
+                onPressed: () async {
+                  widget.detail.tag = _selectedTag;
+                  //save data to firebase
+                  final uid = await Provider.of(context).auth.getCurrentUID();
+                  await db
+                      .collection("userData")
+                      .doc(uid)
+                      .collection("works")
+                      .add(widget.detail.toJson());
+                  // Navigator.of(context).pop();
+                  Navigator.popUntil(context, (route) {
+                    return count++ == 5;
+                  });
 
-                // Navigator.of(context).popUntil((route) => route.isFirst);
-              },
+                  // Navigator.of(context).popUntil((route) => route.isFirst);
+                },
+              ),
             ),
           ],
         ),

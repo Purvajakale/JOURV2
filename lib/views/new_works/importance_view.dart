@@ -23,8 +23,8 @@ class _NewScheduleImportanceState extends State<NewScheduleImportance> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('''Create new Schedule - 
-          importance'''),
+        title: Text(''' 
+          Importance'''),
       ),
       body: Center(
         child: Column(
@@ -35,7 +35,16 @@ class _NewScheduleImportanceState extends State<NewScheduleImportance> {
                 'start date: ${DateFormat('dd-MM-yyyy').format(widget.detail.startDate).toString()}'),
             Text(
                 'end date: ${DateFormat('dd-MM-yyyy').format(widget.detail.endDate).toString()}'),
-            Text('Enter the importance'),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                'Enter the importance',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
             // Padding(
             //   padding: const EdgeInsets.all(30.0),
             //   child: TextField(
@@ -58,6 +67,10 @@ class _NewScheduleImportanceState extends State<NewScheduleImportance> {
 
             RaisedButton(
               child: Text('Continue'),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7.0)),
+              color: Colors.blueAccent,
+              textColor: Colors.white,
               onPressed: () {
                 widget.detail.importance = _currentimportance;
                 Navigator.push(

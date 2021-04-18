@@ -93,28 +93,33 @@ class _SignUpViewState extends State<SignUpView> {
     final _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Container(
-        color: primaryColor,
-        height: _height,
-        width: _width,
-        child: SafeArea(
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: _height * 0.025),
-              showAlert(),
-              SizedBox(height: _height * 0.025),
-              buildHeaderText(),
-              SizedBox(height: _height * 0.05),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Form(
-                  key: formKey,
-                  child: Column(
-                    children: buildInputs() + buildButtons(),
+      body: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("images/bg.JPG"), fit: BoxFit.cover)),
+          // color: primaryColor,
+          height: _height,
+          width: _width,
+          child: SafeArea(
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: _height * 0.025),
+                showAlert(),
+                SizedBox(height: _height * 0.025),
+                buildHeaderText(),
+                SizedBox(height: _height * 0.05),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: buildInputs() + buildButtons(),
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -174,7 +179,7 @@ class _SignUpViewState extends State<SignUpView> {
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 35,
-        color: Colors.white,
+        color: Colors.black,
       ),
     );
   }
@@ -268,14 +273,14 @@ class _SignUpViewState extends State<SignUpView> {
         width: MediaQuery.of(context).size.width * 0.7,
         child: RaisedButton(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          color: Colors.white,
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(7.0)),
+          color: Colors.blueAccent,
           textColor: primaryColor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               _submitButtonText,
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w300),
+              style: TextStyle(fontSize: 16, color: Colors.white),
             ),
           ),
           onPressed: submit,
@@ -285,7 +290,7 @@ class _SignUpViewState extends State<SignUpView> {
       FlatButton(
         child: Text(
           _switchButtonText,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.blueGrey.shade900),
         ),
         onPressed: () {
           switchFormState(_newFormState);
@@ -299,7 +304,7 @@ class _SignUpViewState extends State<SignUpView> {
       child: FlatButton(
         child: Text(
           "Forgot Password?",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.blueGrey.shade900),
         ),
         onPressed: () {
           setState(() {

@@ -36,8 +36,7 @@ class _onboardingState extends State<onboarding> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/bg.JPG"),
-                    fit: BoxFit.cover)),
+                    image: AssetImage("images/bg.JPG"), fit: BoxFit.cover)),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -139,8 +138,7 @@ class _onboardingState extends State<onboarding> {
           width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.all(50),
           decoration: BoxDecoration(
-              image:
-                  DecorationImage(image: AssetImage('assets/images/$img.PNG'))),
+              image: DecorationImage(image: AssetImage('images/$img.PNG'))),
         ),
         SizedBox(
           height: 50,

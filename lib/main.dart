@@ -27,10 +27,10 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.light,
             primarySwatch: Colors.blue,
             appBarTheme: AppBarTheme(
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.blueAccent,
             ),
             floatingActionButtonTheme: FloatingActionButtonThemeData(
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.blueAccent,
             )),
         darkTheme: ThemeData(
           brightness: Brightness.dark,

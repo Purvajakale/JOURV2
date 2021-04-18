@@ -14,8 +14,8 @@ class NewScheduleDescription extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('''Create new Schedule - 
-          description'''),
+        title: Text('''
+          Description'''),
       ),
       body: Center(
         child: Column(
@@ -27,7 +27,16 @@ class NewScheduleDescription extends StatelessWidget {
             Text(
                 'end date: ${DateFormat('dd-MM-yyyy').format(detail.endDate).toString()}'),
             Text("importance : ${detail.importance}"),
-            Text('Enter the Description'),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                'Enter the Description',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: TextField(
@@ -37,6 +46,10 @@ class NewScheduleDescription extends StatelessWidget {
             ),
             RaisedButton(
               child: Text('Continue'),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7.0)),
+              color: Colors.blueAccent,
+              textColor: Colors.white,
               onPressed: () {
                 detail.description = _titleController.text;
                 Navigator.push(

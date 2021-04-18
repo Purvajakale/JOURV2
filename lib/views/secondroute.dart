@@ -67,20 +67,23 @@ class SecondRoute extends StatelessWidget {
                   SizedBox(
                     height: 15.0,
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Description'),
-                    minLines: 2,
-                    maxLines: 25,
-                    validator: (String value) {
-                      if (value.isEmpty) {
-                        return 'Blog Description is required';
-                      }
-                      return null;
-                    },
-                    onSaved: (String value) {
-                      // onsaved(value);
-                      myvalue = value;
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(labelText: 'Description'),
+                      minLines: 2,
+                      maxLines: 25,
+                      validator: (String value) {
+                        if (value.isEmpty) {
+                          return 'Blog Description is required';
+                        }
+                        return null;
+                      },
+                      onSaved: (String value) {
+                        // onsaved(value);
+                        myvalue = value;
+                      },
+                    ),
                   ),
                   SizedBox(
                     height: 15.0,

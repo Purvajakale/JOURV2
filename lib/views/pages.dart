@@ -34,7 +34,7 @@ class _UploadPageState extends State<UploadPage> {
       child: ElevatedButton(
         child: Text("Add a new post"),
         style: ElevatedButton.styleFrom(
-          primary: Colors.lightBlue,
+          primary: Colors.blueAccent,
           onPrimary: Colors.white,
           onSurface: Colors.grey,
         ),

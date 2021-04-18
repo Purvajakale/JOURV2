@@ -19,7 +19,16 @@ class NewScheduleLog extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Enter the name'),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Text(
+                'Enter the name',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: TextField(
@@ -29,6 +38,10 @@ class NewScheduleLog extends StatelessWidget {
             ),
             RaisedButton(
               child: Text('Continue'),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(7.0)),
+              color: Colors.blueAccent,
+              textColor: Colors.white,
               onPressed: () {
                 detail.name = _titleController.text;
                 Navigator.push(

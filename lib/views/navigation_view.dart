@@ -114,7 +114,7 @@ class _HomeState extends State<Home> {
         // ],
         items: [
           Icon(
-            Icons.home,
+            Icons.today_outlined,
             size: 30,
             color: Colors.white,
           ),
@@ -124,7 +124,7 @@ class _HomeState extends State<Home> {
           //   color: Colors.white,
           // ),
           Icon(
-            Icons.camera,
+            Icons.camera_alt_rounded,
             size: 30,
             color: Colors.white,
           ),
