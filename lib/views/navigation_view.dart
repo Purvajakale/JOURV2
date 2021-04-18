@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
 
     final List<Widget> _children = [
       HomeView(),
-      ProfileView(),
+      // ProfileView(),
       UploadPage(),
       HomePage()
       // SchedulePage(),
@@ -39,12 +39,47 @@ class _HomeState extends State<Home> {
         title: Text('JOUR'),
         backgroundColor: Colors.blue,
         actions: <Widget>[
+          // Padding(
+          //   padding: const EdgeInsets.all(4.0),
+          //   child: IconButton(
+          //     icon: Icon(
+          //       Icons.add,
+          //       size: 40,
+          //     ),
+          //     onPressed: () {
+          //       Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => NewScheduleLog(
+          //                   detail: newWork,
+          //                 )),
+          //       );
+          //     },
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(4.0),
             child: IconButton(
               icon: Icon(
+                Icons.account_circle,
+                size: 35,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileView()),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      body: _children[_currentIndex],
+      floatingActionButton: _currentIndex == 0
+          ? FloatingActionButton(
+              child: Icon(
                 Icons.add,
-                size: 40,
+                size: 30,
               ),
               onPressed: () {
                 Navigator.push(
@@ -55,11 +90,8 @@ class _HomeState extends State<Home> {
                           )),
                 );
               },
-            ),
-          ),
-        ],
-      ),
-      body: _children[_currentIndex],
+            )
+          : null,
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
         onTap: onTabTapped,
@@ -86,11 +118,11 @@ class _HomeState extends State<Home> {
             size: 30,
             color: Colors.white,
           ),
-          Icon(
-            Icons.account_circle,
-            size: 30,
-            color: Colors.white,
-          ),
+          // Icon(
+          //   Icons.account_circle,
+          //   size: 30,
+          //   color: Colors.white,
+          // ),
           Icon(
             Icons.camera,
             size: 30,

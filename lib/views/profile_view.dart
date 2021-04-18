@@ -6,22 +6,27 @@ import 'package:jourv2/services/loading.dart';
 class ProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          children: <Widget>[
-            FutureBuilder(
-              future: Provider.of(context).auth.getCurrentUser(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  return displayUserInformation(context, snapshot);
-                } else {
-                  return Loading();
-                }
-              },
-            )
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Profile'),
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: <Widget>[
+              FutureBuilder(
+                future: Provider.of(context).auth.getCurrentUser(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return displayUserInformation(context, snapshot);
+                  } else {
+                    return Loading();
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
