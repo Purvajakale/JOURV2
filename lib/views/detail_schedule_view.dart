@@ -100,7 +100,7 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text("${getDaysUntilSchedule()}",
-                    style: TextStyle(fontSize: 45)),
+                    style: TextStyle(fontSize: 45, color: Colors.white)),
                 Text(": days until your schedule",
                     style: TextStyle(fontSize: 17))
               ],
@@ -109,7 +109,7 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text("${getTotalScheduleDays()}",
-                    style: TextStyle(fontSize: 45)),
+                    style: TextStyle(fontSize: 45, color: Colors.white)),
                 Text(": total number of schedule days",
                     style: TextStyle(fontSize: 17))
               ],
@@ -169,11 +169,13 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
       ];
     } else {
       return [
-        Text(
-          widget.work.notes,
-          style: TextStyle(color: Colors.grey[300]),
-          overflow: TextOverflow.ellipsis,
-        )
+        Expanded(
+          child: Text(
+            widget.work.notes,
+            style: TextStyle(color: Colors.grey[300]),
+            // overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ];
     }
   }

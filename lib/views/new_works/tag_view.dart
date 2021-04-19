@@ -22,7 +22,7 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
   final List<String> meet = ['official', 'unofficial', 'family', 'health'];
 
   Image getImage(photoReference) {
-    final url = "images/tag-remove.png";
+    final url = "images/tag-removebg.png";
     return Image.asset(url, fit: BoxFit.cover);
   }
 
@@ -90,7 +90,9 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.60,
                       child: RaisedButton(
-                        child: Text('Finish'),
+                        color: Colors.blueAccent,
+                        child: Text('Finish',
+                            style: TextStyle(color: Colors.white)),
                         onPressed: () async {
                           widget.detail.tag = _selectedTag;
                           //save data to firebase

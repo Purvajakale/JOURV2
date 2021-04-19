@@ -46,9 +46,9 @@ class _onboardingState extends State<onboarding> {
                 child: PageView(
                   controller: _pageController,
                   children: [
-                    onBoardPage("onboard1", "Welcome to JOUR"),
-                    onBoardPage("onboard2", "Where Work Happens"),
-                    onBoardPage("onboard3", "Plan your Day"),
+                    onBoardPage("onboard1", "Add tasks and quick notes"),
+                    onBoardPage("onboard2", "Manage your Expenditure"),
+                    onBoardPage("onboard3", "Blog your Day"),
                   ],
                   onPageChanged: (value) => {setCurrentPage(value)},
                 ),

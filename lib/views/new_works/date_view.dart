@@ -75,8 +75,8 @@ class _NewScheduleDateState extends State<NewScheduleDate> {
           width: MediaQuery.of(context).size.width * 0.60,
           child: RaisedButton(
             child: Text("Change Date Range"),
-            color: Colors.deepPurpleAccent,
-            textColor: Colors.white,
+            color: Colors.white,
+            textColor: Colors.blueAccent,
             onPressed: () async {
               await displayRangeDatePicker(context);
             },
@@ -85,8 +85,8 @@ class _NewScheduleDateState extends State<NewScheduleDate> {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.60,
           child: RaisedButton(
-            child: Text('Continue'),
-            color: Colors.amberAccent,
+            child: Text('Continue', style: TextStyle(color: Colors.white)),
+            color: Colors.blueAccent,
             onPressed: () {
               widget.detail.startDate = _startDate;
               widget.detail.endDate = _endDate;
