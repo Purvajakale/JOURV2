@@ -146,7 +146,7 @@ class _EditNotesViewState extends State<EditNotesView> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Colors.deepPurpleAccent,
+        color: Colors.blue.shade600,
         child: Hero(
           tag: "Notes-${widget.work.name}",
           transitionOnUserGestures: true,
@@ -168,7 +168,7 @@ class _EditNotesViewState extends State<EditNotesView> {
 
   Widget buildHeading(context) {
     return Material(
-      color: Colors.deepPurpleAccent,
+      color: Colors.blue.shade600,
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, top: 10.0),
         child: Row(
@@ -193,7 +193,7 @@ class _EditNotesViewState extends State<EditNotesView> {
 
   Widget buildNotesText() {
     return Material(
-      color: Colors.deepPurpleAccent,
+      color: Colors.blue.shade600,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextField(
@@ -212,24 +212,28 @@ class _EditNotesViewState extends State<EditNotesView> {
 
   Widget buildSubmitButton(context) {
     return Material(
-      color: Colors.deepPurpleAccent,
-      child: RaisedButton(
-        child: Text("Save"),
-        color: Colors.greenAccent,
-        onPressed: () async {
-          widget.work.notes = _notesController.text;
+      color: Colors.blue.shade600,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.60,
+        child: RaisedButton(
+          child: Text("Save",
+              style: TextStyle(fontSize: 24, color: Colors.blue.shade600)),
+          color: Colors.white,
+          onPressed: () async {
+            widget.work.notes = _notesController.text;
 
-          final uid = await Provider.of(context).auth.getCurrentUID();
+            final uid = await Provider.of(context).auth.getCurrentUID();
 
-          await db
-              .collection("userData")
-              .doc(uid)
-              .collection("works")
-              .doc(widget.work.documentId)
-              .update({'notes': _notesController.text});
+            await db
+                .collection("userData")
+                .doc(uid)
+                .collection("works")
+                .doc(widget.work.documentId)
+                .update({'notes': _notesController.text});
 
-          Navigator.of(context).pop();
-        },
+            Navigator.of(context).pop();
+          },
+        ),
       ),
     );
   }

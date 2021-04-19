@@ -30,7 +30,7 @@ class _EditBudgetViewState extends State<EditBudgetView> {
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        color: Colors.deepOrangeAccent,
+        color: Colors.blue.shade800,
         child: Hero(
           tag: "Budget-${widget.work.name}",
           transitionOnUserGestures: true,
@@ -52,7 +52,7 @@ class _EditBudgetViewState extends State<EditBudgetView> {
 
   Widget buildHeading(context) {
     return Material(
-      color: Colors.deepOrangeAccent,
+      color: Colors.blue.shade800,
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, top: 10.0),
         child: Row(
@@ -77,7 +77,7 @@ class _EditBudgetViewState extends State<EditBudgetView> {
 
   Widget buildNotesText() {
     return Material(
-      color: Colors.deepOrangeAccent,
+      color: Colors.blue.shade800,
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: TextField(
@@ -97,24 +97,28 @@ class _EditBudgetViewState extends State<EditBudgetView> {
 
   Widget buildSubmitButton(context) {
     return Material(
-      color: Colors.deepOrangeAccent,
-      child: RaisedButton(
-        child: Text("Save"),
-        color: Colors.greenAccent,
-        onPressed: () async {
-          widget.work.budget = _budgetController.text;
+      color: Colors.blue.shade800,
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.60,
+        child: RaisedButton(
+          child: Text("Save",
+              style: TextStyle(fontSize: 24, color: Colors.blue.shade800)),
+          color: Colors.white,
+          onPressed: () async {
+            widget.work.budget = _budgetController.text;
 
-          final uid = await Provider.of(context).auth.getCurrentUID();
+            final uid = await Provider.of(context).auth.getCurrentUID();
 
-          await db
-              .collection("userData")
-              .doc(uid)
-              .collection("works")
-              .doc(widget.work.documentId)
-              .update({'budget': _budgetController.text});
+            await db
+                .collection("userData")
+                .doc(uid)
+                .collection("works")
+                .doc(widget.work.documentId)
+                .update({'budget': _budgetController.text});
 
-          Navigator.of(context).pop();
-        },
+            Navigator.of(context).pop();
+          },
+        ),
       ),
     );
   }

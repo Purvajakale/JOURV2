@@ -20,8 +20,9 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              title: Text('Schedule Details'),
-              backgroundColor: Colors.blue,
+              title: Text('Schedule Details',
+                  style: TextStyle(color: Colors.black)),
+              backgroundColor: Colors.blue.shade200,
               expandedHeight: 350.0,
               flexibleSpace: FlexibleSpaceBar(
                 background: Image.asset("images/listimage.png"),
@@ -55,7 +56,7 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   widget.work.name,
-                  style: TextStyle(fontSize: 30, color: Colors.blue[900]),
+                  style: TextStyle(fontSize: 30, color: Colors.blueAccent),
                 ),
               ),
             ],
@@ -90,7 +91,7 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
   // DAYS TILL TRIP CARD
   Widget daysOutCard() {
     return Card(
-      color: Colors.amberAccent,
+      color: Colors.blue.shade400,
       child: Padding(
         padding: const EdgeInsets.all(2.0),
         child: Column(
@@ -124,7 +125,7 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
       tag: "Notes-${widget.work.name}",
       transitionOnUserGestures: true,
       child: Card(
-        color: Colors.deepPurpleAccent,
+        color: Colors.blue.shade600,
         child: InkWell(
           child: Column(
             children: <Widget>[
@@ -139,9 +140,7 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: setNoteText(),
-                ),
+                child: Row(children: setNoteText()),
               )
             ],
           ),
@@ -170,7 +169,11 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
       ];
     } else {
       return [
-        Text(widget.work.notes, style: TextStyle(color: Colors.grey[300]))
+        Text(
+          widget.work.notes,
+          style: TextStyle(color: Colors.grey[300]),
+          overflow: TextOverflow.ellipsis,
+        )
       ];
     }
   }
@@ -180,7 +183,7 @@ class _DetailScheduleViewState extends State<DetailScheduleView> {
       tag: "Budget-${widget.work.name}",
       transitionOnUserGestures: true,
       child: Card(
-        color: Colors.deepOrange[800],
+        color: Colors.blue.shade800,
         child: InkWell(
           child: Column(
             children: <Widget>[

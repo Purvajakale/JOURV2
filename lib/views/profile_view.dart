@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:jourv2/views/sign_up_view.dart';
 import 'package:jourv2/widget/provider_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:jourv2/services/loading.dart';
 
 class ProfileView extends StatelessWidget {
+  User user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     // return Scaffold(
@@ -18,8 +21,8 @@ class ProfileView extends StatelessWidget {
           decoration: BoxDecoration(
               gradient: LinearGradient(
             colors: [
-              Color.fromRGBO(9, 17, 30, 1),
-              Color.fromRGBO(76, 139, 248, 1),
+              Color.fromRGBO(75, 138, 250, 1),
+              Color.fromRGBO(237, 243, 255, 1),
             ],
             begin: FractionalOffset.bottomCenter,
             end: FractionalOffset.topCenter,
@@ -40,27 +43,30 @@ class ProfileView extends StatelessWidget {
           ),
         ),
         Scaffold(
+          appBar: AppBar(
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.logout,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => SignUpView()),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
               child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 50),
+            padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 50),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 35,
-                    ),
-                    Icon(
-                      Icons.logout,
-                      color: Colors.white,
-                      size: 35,
-                    ),
-                  ],
-                ),
                 SizedBox(
                   height: 20,
                 ),
@@ -68,7 +74,7 @@ class ProfileView extends StatelessWidget {
                   'My\nProfile',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 30,
                   ),
                 ),
@@ -97,26 +103,66 @@ class ProfileView extends StatelessWidget {
                                 height: 70,
                               ),
                               Text(
-                                "Name: ${user.displayName}",
+                                "${user.displayName}",
                                 style: TextStyle(
-                                    color: Color.fromRGBO(76, 139, 248, 1),
+                                    color: Color.fromRGBO(75, 138, 250, 1),
                                     fontSize: 32),
                               ),
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Column(
                                     children: [
                                       Text(
-                                        "Email: ${user.email}",
+                                        "Created",
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            color: Color.fromRGBO(9, 17, 30, 1),
-                                            fontSize: 21),
+                                          color: Color.fromRGBO(9, 17, 30, 1),
+                                          fontSize: 17,
+                                        ),
                                       ),
                                       Text(
-                                        "Created: ${DateFormat('MM/dd/yyyy').format(user.metadata.creationTime)}",
+                                        "${DateFormat('MM/dd/yyyy').format(user.metadata.creationTime)}",
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
-                                            color: Color.fromRGBO(9, 17, 30, 1),
-                                            fontSize: 21),
+                                          color:
+                                              Color.fromRGBO(75, 138, 250, 1),
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0, vertical: 38),
+                                    child: Container(
+                                      height: 40,
+                                      width: 5,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        "Email",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color: Color.fromRGBO(9, 17, 30, 1),
+                                          fontSize: 17,
+                                        ),
+                                      ),
+                                      Text(
+                                        "${user.email}",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(76, 139, 248, 1),
+                                          fontSize: 15,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -150,30 +196,7 @@ class ProfileView extends StatelessWidget {
   Widget displayUserInformation(context, snapshot) {
     final user = snapshot.data;
     return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Name: ${user.displayName}",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Email: ${user.email}",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "Created: ${DateFormat('MM/dd/yyyy').format(user.metadata.creationTime)}",
-            style: TextStyle(fontSize: 20),
-          ),
-        ),
-        showSignOut(context),
-      ],
+      children: <Widget>[],
     );
   }
 

@@ -36,7 +36,7 @@ class _NewScheduleDateState extends State<NewScheduleDate> {
   }
 
   Image getImage(photoReference) {
-    final url = "images/listviewer.png";
+    final url = "images/date-remove.png";
     return Image.asset(url, fit: BoxFit.cover);
   }
 
@@ -47,8 +47,8 @@ class _NewScheduleDateState extends State<NewScheduleDate> {
         child: CustomScrollView(
           slivers: <Widget>[
             SliverAppBar(
-              title: Text(''),
-              backgroundColor: Colors.blue,
+              title: Text('Date Range', style: TextStyle(color: Colors.black)),
+              backgroundColor: Colors.blue.shade200,
               expandedHeight: 350.0,
               flexibleSpace: FlexibleSpaceBar(
                 background: getImage(widget.detail.photoReference),
