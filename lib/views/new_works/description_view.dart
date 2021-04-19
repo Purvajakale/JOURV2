@@ -68,6 +68,7 @@ class _NewScheduleDescriptionState extends State<NewScheduleDescription> {
                           width: MediaQuery.of(context).size.width * 0.60,
                           child: TextField(
                             controller: _titleController,
+                            maxLength: 30,
                           ),
                         ),
                       ],
