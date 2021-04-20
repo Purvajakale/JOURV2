@@ -89,39 +89,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool showHome = false;
-  @override
-  void initState() {
-    // TODO: implement initState
-    Timer(Duration(seconds: 3), openOnBoard);
-    super.initState();
-  }
+  // bool showHome = false;
+  // @override
+  // void initState() {
+  //   Timer(Duration(seconds: 3), openOnBoard);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: showHome
-          ? HomeController()
-          : Center(
-              child: Container(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/homepage.JPEG'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            ),
-    );
+        body:
+            // showHome
+            //     ?
+            HomeController()
+        // :
+        // Center(
+        //     child: Container(
+        //       height: MediaQuery.of(context).size.height,
+        //       width: MediaQuery.of(context).size.width,
+        //       decoration: BoxDecoration(
+        //         image: DecorationImage(
+        //           image: AssetImage('images/homepage.JPEG'),
+        //           fit: BoxFit.cover,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        );
   }
 
-  void openOnBoard() {
-    setState(() {
-      showHome = true;
-    });
-    // Navigator.push(
-    //     context, MaterialPageRoute(builder: (context) => HomeController()));
-  }
+  // void openOnBoard() {
+  //   setState(() {
+  //     showHome = true;
+  //   });
+  //   // Navigator.push(
+  //   //     context, MaterialPageRoute(builder: (context) => HomeController()));
+  // }
 }
