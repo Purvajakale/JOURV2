@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:local_auth/local_auth.dart';
 import 'views/navigation_view.dart';
 import 'package:jourv2/views/first_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:jourv2/views/sign_up_view.dart';
+import 'package:jourv2/views/authenticaionRequired.dart';
 import 'package:jourv2/widget/provider_widget.dart';
 import 'package:jourv2/services/auth_service.dart';
 import 'package:jourv2/views/onboarding.dart';
@@ -15,38 +17,53 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  var localAuth = LocalAuthentication();
+  bool didAuthenticate = false;
+
+  void doAuthentication() async {
+    didAuthenticate = await localAuth.authenticate(
+        localizedReason: 'Please authenticate to start the day');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    doAuthentication();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      auth: AuthService(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: "Travel Budget App",
-        theme: ThemeData(
-            brightness: Brightness.light,
-            primarySwatch: Colors.blue,
-            appBarTheme: AppBarTheme(
-              backgroundColor: Colors.blueAccent,
+    return didAuthenticate
+        ? Provider(
+            auth: AuthService(),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: "JOUR",
+              theme: ThemeData(
+                  brightness: Brightness.light,
+                  primarySwatch: Colors.blue,
+                  appBarTheme: AppBarTheme(
+                    backgroundColor: Colors.blueAccent,
+                  ),
+                  floatingActionButtonTheme: FloatingActionButtonThemeData(
+                    backgroundColor: Colors.blueAccent,
+                  )),
+              darkTheme: ThemeData(
+                brightness: Brightness.dark,
+                primarySwatch: Colors.blue,
+              ),
+              home: MyHomePage(),
             ),
-            floatingActionButtonTheme: FloatingActionButtonThemeData(
-              backgroundColor: Colors.blueAccent,
-            )),
-        darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          primarySwatch: Colors.blue,
-        ),
-        home: MyHomePage(),
-      ),
-    );
-  } // home: HomeController(),
-// routes: <String, WidgetBuilder>{
-//   '/signUp': (BuildContext context) =>
-//       SignUpView(authFormType: AuthFormType.signUp),
-//   '/signIn': (BuildContext context) =>
-//       SignUpView(authFormType: AuthFormType.signIn),
-//   '/home': (BuildContext context) => HomeController(),
-// },
+          )
+        : AuthenticationRequired();
+  }
 }
 
 // class HomeController extends StatelessWidget {
