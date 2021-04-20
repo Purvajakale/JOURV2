@@ -52,10 +52,8 @@ class ProfileView extends StatelessWidget {
                     Icons.logout,
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUpView()),
-                    );
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pop(context);
                   },
                 ),
               ),
