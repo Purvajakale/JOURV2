@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
@@ -20,11 +21,17 @@ Icon buildChild(tag) {
 }
 
 class HomeView extends StatelessWidget {
+  final uuid = FirebaseAuth.instance.currentUser.uid;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: StreamBuilder(
-          stream: getUsersWorksStreamSnapshot(context),
+          stream: FirebaseFirestore.instance
+              .collection("userData")
+              .doc(uuid)
+              .collection("works")
+              .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Loading();
             return new ListView.builder(
@@ -35,15 +42,15 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Stream<QuerySnapshot> getUsersWorksStreamSnapshot(
-      BuildContext context) async* {
-    final uid = await Provider.of(context).auth.getCurrentUID();
-    yield* FirebaseFirestore.instance
-        .collection("userData")
-        .doc(uid)
-        .collection("works")
-        .snapshots();
-  }
+  // Stream<QuerySnapshot> getUsersWorksStreamSnapshot(
+  //     BuildContext context) async* {
+  //   final uid = uuid;
+  //   yield* FirebaseFirestore.instance
+  //       .collection("userData")
+  //       .doc(uid)
+  //       .collection("works")
+  //       .snapshots();
+  // }
 
   Widget buildWorkCard(BuildContext context, DocumentSnapshot document) {
     final work = details.fromSnapshot(document);
@@ -63,6 +70,15 @@ class HomeView extends StatelessWidget {
                         work.name,
                         style: new TextStyle(
                             fontSize: 25.0, fontWeight: FontWeight.w500),
+                      ),
+                      Spacer(flex: 20),
+                      IconButton(
+                        icon: const Icon(Icons.delete_forever_rounded),
+                        color: Colors.red.shade300,
+                        iconSize: 30,
+                        onPressed: () {
+                          document.reference.delete();
+                        },
                       ),
                       Spacer(),
                     ],

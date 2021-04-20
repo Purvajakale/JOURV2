@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jourv2/models/work.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,6 +19,7 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
   int count = 0;
 
   final db = FirebaseFirestore.instance;
+  final uuid = FirebaseAuth.instance.currentUser.uid;
   String _selectedTag = 'official';
   final List<String> meet = ['official', 'unofficial', 'family', 'health'];
 
@@ -96,8 +98,7 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
                         onPressed: () async {
                           widget.detail.tag = _selectedTag;
                           //save data to firebase
-                          final uid =
-                              await Provider.of(context).auth.getCurrentUID();
+                          final uid = uuid;
                           await db
                               .collection("userData")
                               .doc(uid)
