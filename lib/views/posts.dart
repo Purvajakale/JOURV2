@@ -63,14 +63,24 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Text(
                               documentSnapshot.data()['date'],
-                              style: TextStyle(fontSize: 10.0),
+                              style:
+                                  TextStyle(fontSize: 10.0, color: Colors.grey),
                             ),
                             Text(
                               documentSnapshot.data()['time'],
-                              style: TextStyle(fontSize: 10.0),
+                              style:
+                                  TextStyle(fontSize: 10.0, color: Colors.grey),
                             ),
                           ],
                         ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete_forever_rounded),
+                        color: Colors.red.shade300,
+                        iconSize: 30,
+                        onPressed: () {
+                          //document.reference.delete();
+                        },
                       ),
                     ],
                   ),

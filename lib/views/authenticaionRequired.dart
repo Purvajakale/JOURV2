@@ -7,11 +7,9 @@ class AuthenticationRequired extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('images/homepage.JPEG'),
-              fit: BoxFit.cover,
-            ),
+          child: Center(
+            child: Text('Authenticating...',
+                style: TextStyle(color: Colors.blueAccent, fontSize: 50)),
           ),
         ),
       ),
