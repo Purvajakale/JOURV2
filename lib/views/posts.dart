@@ -74,14 +74,6 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.delete_forever_rounded),
-                        color: Colors.red.shade300,
-                        iconSize: 30,
-                        onPressed: () {
-                          //document.reference.delete();
-                        },
-                      ),
                     ],
                   ),
                 ),

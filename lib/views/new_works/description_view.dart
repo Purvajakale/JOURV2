@@ -52,7 +52,7 @@ class _NewScheduleDescriptionState extends State<NewScheduleDescription> {
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.60,
                           child: Padding(
-                            padding: const EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Tab(
                               child: Text(
                                 'Description',
