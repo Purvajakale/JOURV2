@@ -27,10 +27,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection("userData")
-              .doc(uuid)
-              .collection("works")
+          stream: FirebaseFirestore.instance.collection("userData/$uuid/works")
               .snapshots(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) return Loading();

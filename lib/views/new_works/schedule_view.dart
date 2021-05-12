@@ -11,6 +11,7 @@ class NewScheduleLog extends StatefulWidget {
 }
 
 class _NewScheduleLog extends State<NewScheduleLog> {
+    TextEditingController _titleController = new TextEditingController();
   Image getImage(photoReference) {
     final url = "images/name.png";
     return Image.asset(url, fit: BoxFit.cover);
@@ -18,9 +19,6 @@ class _NewScheduleLog extends State<NewScheduleLog> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _titleController = new TextEditingController();
-    _titleController.text = widget.detail.name;
-
     return Scaffold(
       body: Center(
         child: CustomScrollView(

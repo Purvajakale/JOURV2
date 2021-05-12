@@ -38,13 +38,13 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(10.0),
                         child: CachedNetworkImage(
                           imageUrl: documentSnapshot.data()['image'],
+                          fit: BoxFit.cover,
                           height: 150,
-                          fit: BoxFit.fitHeight,
-                          placeholder: (context, url) => Container(
-                            child: CircularProgressIndicator(),
-                            height: 150,
-                            width: 100,
-                          ),
+                          width: 150,
+                          placeholder: (context, url) => SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator()),
                         ),
                       ),
                       Expanded(
@@ -73,6 +73,14 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete_forever_rounded),
+                        color: Colors.red.shade300,
+                        iconSize: 30,
+                        onPressed: () async {
+                          await documentSnapshot.reference.delete();
+                        },
                       ),
                     ],
                   ),

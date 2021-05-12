@@ -12,6 +12,7 @@ class NewScheduleDescription extends StatefulWidget {
 }
 
 class _NewScheduleDescriptionState extends State<NewScheduleDescription> {
+    TextEditingController _titleController = new TextEditingController();
   Image getImage(photoReference) {
     final url = "images/description-remove.png";
     return Image.asset(url, fit: BoxFit.cover);
@@ -19,8 +20,6 @@ class _NewScheduleDescriptionState extends State<NewScheduleDescription> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _titleController = new TextEditingController();
-    _titleController.text = widget.detail.description;
 
     return Scaffold(
       body: Center(

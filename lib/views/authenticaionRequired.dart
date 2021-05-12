@@ -8,8 +8,21 @@ class AuthenticationRequired extends StatelessWidget {
       home: Scaffold(
         body: Container(
           child: Center(
-            child: Text('Authenticating...',
-                style: TextStyle(color: Colors.blueAccent, fontSize: 50)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(),
+                SizedBox(height:30),
+                Text(
+                  'Authenticating...',
+                  style: TextStyle(
+                    color: Colors.blueAccent,
+                    fontSize: 20,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

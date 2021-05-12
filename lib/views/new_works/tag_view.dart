@@ -17,7 +17,7 @@ class NewScheduleTag extends StatefulWidget {
 
 class _NewScheduleTagState extends State<NewScheduleTag> {
   int count = 0;
-
+   
   final db = FirebaseFirestore.instance;
   final uuid = FirebaseAuth.instance.currentUser.uid;
   String _selectedTag = 'official';
@@ -30,8 +30,6 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _titleController = new TextEditingController();
-    _titleController.text = widget.detail.description;
 
     return Scaffold(
       body: Center(

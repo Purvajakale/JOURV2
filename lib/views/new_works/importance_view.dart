@@ -14,7 +14,7 @@ class NewScheduleImportance extends StatefulWidget {
 
 class _NewScheduleImportanceState extends State<NewScheduleImportance> {
   final List<int> imp = [100, 200, 300, 400, 500, 600, 700, 800, 900];
-
+    TextEditingController _titleController = new TextEditingController();
   int _currentimportance = 100;
   Image getImage(photoReference) {
     final url = "images/importance-remove.png";
@@ -23,9 +23,6 @@ class _NewScheduleImportanceState extends State<NewScheduleImportance> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _titleController = new TextEditingController();
-    _titleController.text = widget.detail.name;
-
     return Scaffold(
       body: Center(
         child: CustomScrollView(

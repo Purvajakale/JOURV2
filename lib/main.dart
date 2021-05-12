@@ -28,7 +28,10 @@ class _MyAppState extends State<MyApp> {
 
   void doAuthentication() async {
     didAuthenticate = await localAuth.authenticate(
-        localizedReason: 'Please authenticate to start the day');
+      stickyAuth : true,
+      biometricOnly: false,
+      localizedReason: 'Please authenticate to start the day',
+    );
     setState(() {});
   }
 
@@ -65,65 +68,44 @@ class _MyAppState extends State<MyApp> {
         : AuthenticationRequired();
   }
 }
-
-// class HomeController extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final AuthService auth = Provider.of(context).auth;
-//     return StreamBuilder<String>(
-//       stream: auth.onAuthStateChanged,
-//       builder: (context, AsyncSnapshot<String> snapshot) {
-//         if (snapshot.connectionState == ConnectionState.active) {
-//           final bool signedIn = snapshot.hasData;
-//           return signedIn ? Home() : FirstView();
-//         }
-//         return CircularProgressIndicator();
-//       },
-//     );
-//   }
-// }
-
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // bool showHome = false;
-  // @override
-  // void initState() {
-  //   Timer(Duration(seconds: 3), openOnBoard);
-  //   super.initState();
-  // }
+  bool showHome = false;
+  @override
+  void initState() {
+    Timer(Duration(seconds: 3), openOnBoard);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body:
-            // showHome
-            //     ?
-            HomeController()
-        // :
-        // Center(
-        //     child: Container(
-        //       height: MediaQuery.of(context).size.height,
-        //       width: MediaQuery.of(context).size.width,
-        //       decoration: BoxDecoration(
-        //         image: DecorationImage(
-        //           image: AssetImage('images/homepage.JPEG'),
-        //           fit: BoxFit.cover,
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        );
+      body: showHome
+          ? HomeController()
+          : Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('images/homepage.JPEG'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+    );
   }
 
-  // void openOnBoard() {
-  //   setState(() {
-  //     showHome = true;
-  //   });
-  //   // Navigator.push(
-  //   //     context, MaterialPageRoute(builder: (context) => HomeController()));
-  // }
+  void openOnBoard() {
+    setState(() {
+      showHome = true;
+    });
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => HomeController()));
+  }
 }
