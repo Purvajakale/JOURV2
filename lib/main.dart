@@ -27,12 +27,16 @@ class _MyAppState extends State<MyApp> {
   bool didAuthenticate = false;
 
   void doAuthentication() async {
-    didAuthenticate = await localAuth.authenticate(
-      stickyAuth : true,
-      biometricOnly: false,
-      localizedReason: 'Please authenticate to start the day',
-    );
-    setState(() {});
+    try {
+      didAuthenticate = await localAuth.authenticate(
+        stickyAuth: true,
+        biometricOnly: false,
+        localizedReason: 'Please authenticate to start the day',
+      );
+      setState(() {});
+    } catch (e) {
+      throw (e);
+    }
   }
 
   @override
@@ -68,6 +72,7 @@ class _MyAppState extends State<MyApp> {
         : AuthenticationRequired();
   }
 }
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();

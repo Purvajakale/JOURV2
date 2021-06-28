@@ -58,7 +58,7 @@ class _NewScheduleTagState extends State<NewScheduleTag> {
                         Text(
                             'end date: ${DateFormat('dd-MM-yyyy').format(widget.detail.endDate).toString()}'),
                         Text("importance : ${widget.detail.importance}"),
-                        Text("description : ${widget.detail.description}"),
+                        Text("description : ${widget.detail.description}",overflow:TextOverflow.ellipsis),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.60,
                           child: Tab(

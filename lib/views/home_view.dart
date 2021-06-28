@@ -27,14 +27,24 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection("userData/$uuid/works")
+          stream: FirebaseFirestore.instance
+              .collection("userData/$uuid/works")
               .snapshots(),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return Loading();
-            return new ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (BuildContext context, int index) =>
-                    buildWorkCard(context, snapshot.data.docs[index]));
+            if (snapshot.connectionState == ConnectionState.waiting)
+              return Center(child: Loading());
+            else if (!snapshot.hasData)
+              return Center(child: Text('Add a task'));
+            else if (snapshot.hasData) {
+              if (snapshot.data.docs.isEmpty)
+                return Center(child: Text('Add a task'));
+              else
+                return new ListView.builder(
+                    itemCount: snapshot.data.docs.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        buildWorkCard(context, snapshot.data.docs[index]));
+            }
+            return Center(child: Loading());
           }),
     );
   }
